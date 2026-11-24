@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#070a18">
+<meta name="robots" content="noindex, nofollow">
+<title>An Owl Has Arrived</title>
+<meta property="og:title" content="🦉 An owl has arrived for you">
+<meta property="og:description" content="A letter is waiting. Open it with a little magic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=Pinyon+Script&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======================= shared SVG defs ======================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Hogwarts-style crest. Colour comes from currentColor; --crest-bg is the "paper" behind the H -->
+    <symbol id="crest" viewBox="0 0 100 120">
+      <path d="M8 6H92V60C92 92 68 108 50 116C32 108 8 92 8 60Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M14 12H86V60C86 87 66 101 50 109C34 101 14 87 14 60Z" fill="currentColor" opacity=".14"/>
+      <path d="M50 9V113M11 57H89" stroke="currentColor" stroke-width="2.2" opacity=".85"/>
+      <!-- lion -->
+      <g transform="translate(30 32)"><circle r="11" fill="none" stroke="currentColor" stroke-width="4.6" stroke-dasharray="3.2 2.1"/><circle r="6.4" fill="currentColor"/></g>
+      <!-- eagle -->
+      <path transform="translate(70 32)" d="M0-12L-4-5L-14-9L-9 1L-13 6L-3 5L0 13L3 5L13 6L9 1L14-9L4-5Z" fill="currentColor"/>
+      <!-- badger -->
+      <g transform="translate(30 84)"><path d="M-12-7L-8-12L-3-8H3L8-12L12-7C14 4 6 12 0 13C-6 12-14 4-12-7Z" fill="currentColor"/><path d="M0-8V12" style="stroke:var(--crest-bg,#e9d7a8)" stroke-width="3.2"/></g>
+      <!-- snake -->
+      <path transform="translate(70 84)" d="M-12 10C-6 8-8-2 0 0S8-10 4-12" fill="none" stroke="currentColor" stroke-width="4.6" stroke-linecap="round"/>
+      <!-- H -->
+      <circle cx="50" cy="57" r="17" style="fill:var(--crest-bg,#e9d7a8)" stroke="currentColor" stroke-width="3"/>
+      <text x="50" y="66.5" text-anchor="middle" font-family="Cinzel Decorative, Cinzel, serif" font-weight="700" font-size="25" fill="currentColor">H</text>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="app">
+
+  <!-- ======================= night sky ======================= -->
+  <div id="sky"></div>
+  <div id="stars"></div>
+  <div id="moon"></div>
+  <svg id="castle" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g fill="#04050c">
+      <path d="M0 200V150L18 146L40 152L58 140L84 146L110 134L140 140L170 130L200 138L232 128L262 136L290 126L318 134L346 124L372 132L400 126V200Z"/>
+      <rect x="128" y="96" width="150" height="50"/>
+      <rect x="140" y="62" width="16" height="40"/><polygon points="136,62 160,62 148,26"/>
+      <rect x="176" y="46" width="14" height="54"/><polygon points="172,46 194,46 183,6"/>
+      <rect x="206" y="70" width="22" height="34"/><polygon points="202,70 232,70 217,36"/>
+      <rect x="244" y="54" width="16" height="50"/><polygon points="240,54 264,54 252,16"/>
+      <rect x="104" y="100" width="26" height="46"/><polygon points="100,100 134,100 117,70"/>
+      <rect x="276" y="92" width="30" height="52"/><polygon points="272,92 310,92 291,58"/>
+      <rect x="50" y="108" width="14" height="42"/><polygon points="46,108 68,108 57,80"/>
+      <rect x="300" y="116" width="72" height="6"/><rect x="326" y="122" width="5" height="26"/><rect x="354" y="122" width="5" height="26"/>
+      <rect x="364" y="94" width="18" height="44"/><polygon points="360,94 386,94 373,58"/>
+    </g>
+    <g fill="#ffd27a" id="castleWindows">
+      <rect class="win" x="146" y="76" width="3" height="5"/><rect class="win" x="181" y="64" width="3" height="5"/>
+      <rect class="win" x="181" y="80" width="3" height="5"/><rect class="win" x="213" y="84" width="3" height="5"/>
+      <rect class="win" x="250" y="70" width="3" height="5"/><rect class="win" x="250" y="86" width="3" height="5"/>
+      <rect class="win" x="112" y="116" width="3" height="5"/><rect class="win" x="140" y="112" width="3" height="5"/>
+      <rect class="win" x="166" y="114" width="3" height="5"/><rect class="win" x="196" y="112" width="3" height="5"/>
+      <rect class="win" x="232" y="114" width="3" height="5"/><rect class="win" x="284" y="108" width="3" height="5"/>
+      <rect class="win" x="294" y="122" width="3" height="5"/><rect class="win" x="370" y="108" width="3" height="5"/>
+      <rect class="win" x="55" y="124" width="3" height="5"/>
+    </g>
+  </svg>
+  <div id="candles" aria-hidden="true"></div>
+  <div id="heat"></div>
+
+  <!-- ======================= gate (tap to begin) ======================= -->
+  <section id="gate">
+    <div class="gate-inner">
+      <div class="kicker">By Owl Post</div>
+      <h1 class="gate-title">
+        <span>An owl has arrived</span>
+        <em>for</em>
+        <b>Divakshi</b>
+      </h1>
+      <button class="btn" id="beginBtn" type="button">Receive the letter</button>
+      <p class="gate-note">🔊 best with sound on</p>
+    </div>
+  </section>
+
+  <!-- ======================= owl ======================= -->
+  <div id="owl" aria-hidden="true">
+    <svg viewBox="0 0 150 100" width="150" height="100">
+      <g fill="#07090f">
+        <path opacity=".8" d="M72 46C60 22 36 8 8 6C24 18 32 30 42 44Z">
+          <animateTransform attributeName="transform" type="rotate" values="-30 72 46;24 72 46;-30 72 46" dur=".66s" repeatCount="indefinite"/>
+        </path>
+        <path d="M90 52L132 58L130 70L88 64Z"/>
+        <ellipse cx="72" cy="54" rx="24" ry="15"/>
+        <circle cx="46" cy="47" r="13"/>
+        <path d="M36 38L37 26L46 35ZM56 36L58 25L53 37Z"/>
+        <path d="M76 48C66 20 40 4 10 2C28 16 38 30 50 46Z">
+          <animateTransform attributeName="transform" type="rotate" values="-30 76 48;24 76 48;-30 76 48" dur=".66s" begin="-.12s" repeatCount="indefinite"/>
+        </path>
+      </g>
+      <circle cx="42" cy="46" r="2.7" fill="#ffe9a8"/><circle cx="51" cy="46" r="2.7" fill="#ffe9a8"/>
+      <path d="M36 50L29 53L36 55Z" fill="#c9a24a"/>
+      <g id="owlLetter"><rect x="12" y="53" width="24" height="15" rx="1.4" fill="#e9d7a8" transform="rotate(-14 24 60)"/><path d="M12 55L24 62L36 55" fill="none" stroke="#a88d55" stroke-width="1" transform="rotate(-14 24 60)"/></g>
+    </svg>
+  </div>
+
+  <!-- ======================= ENVELOPE ======================= -->
+  <div id="envScene">
+    <div class="env-shadow" id="envShadow"></div>
+    <div class="env-wrap" id="envWrap">
+      <div class="env" id="env">
+
+        <!-- ---- address side ---- -->
+        <div class="face front" id="faceFront">
+          <div class="paper-tex"></div>
+          <div class="postage">
+            <svg viewBox="0 0 60 72" aria-hidden="true">
+              <rect x="1" y="1" width="58" height="70" fill="#f2e6c4" stroke="#b9a468" stroke-width=".8"/>
+              <rect x="6" y="6" width="48" height="60" fill="#5a2a6e"/>
+              <rect x="8.5" y="8.5" width="43" height="55" fill="none" stroke="#e3c677" stroke-width=".8"/>
+              <g style="color:#e3c677;--crest-bg:#5a2a6e"><use href="#crest" x="16" y="14" width="28" height="33"/></g>
+              <text x="30" y="56" text-anchor="middle" font-family="Cinzel, serif" font-size="5.2" letter-spacing=".8" fill="#e3c677">OWL POST</text>
+              <text x="30" y="62" text-anchor="middle" font-family="Cinzel, serif" font-size="4.2" letter-spacing=".6" fill="#e3c677">5 KNUTS</text>
+              <rect x="1" y="1" width="58" height="70" fill="none" stroke="#e9d9a8" stroke-width="3" stroke-dasharray="0 4.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="postmark" id="postmark">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <defs><path id="pmCircle" d="M50 50m-34 0a34 34 0 1 1 68 0a34 34 0 1 1-68 0"/></defs>
+              <circle cx="50" cy="50" r="44" fill="none" stroke="#3b2f4a" stroke-width="2.4"/>
+              <circle cx="50" cy="50" r="27" fill="none" stroke="#3b2f4a" stroke-width="1.4"/>
+              <text font-family="Cinzel, serif" font-size="9.5" font-weight="600" letter-spacing="2.2" fill="#3b2f4a"><textPath href="#pmCircle" startOffset="2%">HOGSMEADE · OWL POST · URGENT ·</textPath></text>
+              <path d="M30 46H70M30 52H70M30 58H70" stroke="#3b2f4a" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div class="addr">
+            <div class="to ink-line" id="addrTo">To Divakshi</div>
+            <div class="rule-line ink-line" id="addrRule"></div>
+            <div class="lines">
+              <div class="l ink-line">Miss D. Jain</div>
+              <div class="l ink-line">The Brightest Witch of Her Age</div>
+              <div class="l ink-line">By Owl Post &mdash; Most Urgent</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- flap side ---- -->
+        <div class="face back" id="faceBack">
+          <div class="inner"></div>
+          <div class="letter-in" id="letterIn"><i class="cr c1"></i><i class="cr c2"></i></div>
+          <svg class="pocket" viewBox="0 0 300 198" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="pgL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#dcc58c"/><stop offset="1" stop-color="#e8d5a2"/></linearGradient>
+              <linearGradient id="pgR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#d6bd80"/><stop offset="1" stop-color="#e6d19c"/></linearGradient>
+              <linearGradient id="pgB" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#cfb676"/><stop offset="1" stop-color="#e9d6a3"/></linearGradient>
+            </defs>
+            <polygon points="0,0 150,117 0,198" fill="url(#pgL)"/>
+            <polygon points="300,0 150,117 300,198" fill="url(#pgR)"/>
+            <polygon points="0,198 150,117 300,198" fill="url(#pgB)"/>
+            <path d="M0 0L150 117L300 0M0 198L150 117L300 198" fill="none" stroke="#8b6c30" stroke-opacity=".55" stroke-width="1.1"/>
+            <rect x=".5" y=".5" width="299" height="197" fill="none" stroke="#7a5c24" stroke-opacity=".45"/>
+          </svg>
+          <div class="flap-hinge" id="flapHinge">
+            <div class="flap-out">
+              <svg viewBox="0 0 300 120" preserveAspectRatio="none" style="overflow:visible" aria-hidden="true">
+                <defs>
+                  <linearGradient id="fgO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efdfb0"/><stop offset="1" stop-color="#ddc58a"/></linearGradient>
+                  <filter id="fsh" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#2a1604" flood-opacity=".45"/></filter>
+                </defs>
+                <path d="M0 0L300 0L158 113Q150 119 142 113Z" fill="url(#fgO)" stroke="#8b6c30" stroke-opacity=".6" stroke-width="1.1" filter="url(#fsh)"/>
+              </svg>
+            </div>
+            <div class="flap-in">
+              <svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true">
+                <defs><linearGradient id="fgI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a98a4d"/><stop offset="1" stop-color="#c8aa6c"/></linearGradient></defs>
+                <path d="M0 0L300 0L158 113Q150 119 142 113Z" fill="url(#fgI)" stroke="#6e5220" stroke-opacity=".6" stroke-width="1.1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="seal" id="seal">
+            <div class="half l"></div><div class="half r"></div>
+          </div>
+          <div class="stamp-pos"><div class="stamp-tool" id="stampTool">
+            <svg viewBox="0 0 80 130" aria-hidden="true">
+              <defs>
+                <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7b5a1c"/><stop offset=".35" stop-color="#f1d482"/><stop offset=".7" stop-color="#b98a2c"/><stop offset="1" stop-color="#5e4210"/></linearGradient>
+                <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2b1708"/><stop offset=".4" stop-color="#6b4222"/><stop offset="1" stop-color="#25130a"/></linearGradient>
+              </defs>
+              <ellipse cx="40" cy="8" rx="17" ry="7" fill="url(#wood)"/>
+              <path d="M24 8C22 28 30 40 33 52H47C50 40 58 28 56 8Z" fill="url(#wood)"/>
+              <rect x="30" y="50" width="20" height="10" rx="2" fill="url(#brass)"/>
+              <path d="M28 60H52L58 78H22Z" fill="url(#brass)"/>
+              <rect x="14" y="78" width="52" height="30" rx="5" fill="url(#brass)"/>
+              <rect x="14" y="104" width="52" height="6" rx="3" fill="#3d2a08" opacity=".55"/>
+            </svg>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= the blank page (becomes the burning paper) ======================= -->
+  <div id="paperWrap">
+    <canvas id="paper"></canvas>
+    <div class="creases" id="creases"><i></i><i></i></div>
+  </div>
+
+  <!-- ======================= note card (revealed under the fire) ======================= -->
+  <div id="noteCard">
+    <canvas id="noteBg"></canvas>
+    <div class="note-text">
+      <div class="n1 ink-line" id="n1">My dearest Divakshi,</div>
+      <div class="n2 ink-line">I know I&rsquo;ve hurt you.</div>
+      <div class="n2 ink-line">Before you decide anything,</div>
+      <div class="n2 ink-line">please hear me out &mdash;</div>
+      <div class="n2 ink-line">every word of it is true.</div>
+    </div>
+  </div>
+
+  <!-- ======================= matchbox ======================= -->
+  <div id="matchScene">
+    <div id="matchbox">
+      <div class="mb-label">
+        <span class="mb-small">Ollivanders</span>
+        <span class="mb-title">Fine Matches</span>
+        <span class="mb-small">Est. 382 B.C.</span>
+      </div>
+      <div class="strip" id="strip"><span class="swipe" id="swipeCue">&rsaquo;&rsaquo;&rsaquo;</span></div>
+      <div class="mb-drawer"></div>
+    </div>
+  </div>
+  <div id="match" aria-label="A match"><div class="m-stick"></div><div class="m-head"></div></div>
+  <div id="lightpool"></div>
+
+  <!-- ======================= THE LETTER ======================= -->
+  <div id="letterLayer">
+    <div id="scroller">
+      <article id="parchment">
+        <canvas id="parchMended"></canvas>
+        <canvas id="parchBurnt"></canvas>
+
+        <div id="letterContent">
+          <header class="lh reveal">
+            <svg class="crest-big" aria-hidden="true"><use href="#crest"/></svg>
+            <div class="motto">Draco dormiens nunquam titillandus</div>
+            <h2 class="school">Hogwarts</h2>
+            <div class="school-sub">School <small>of</small> Witchcraft<br><small>and</small> Wizardry</div>
+            <div class="rule"><span>&#10022;</span></div>
+            <div class="head-line">Headmaster: <i>A Very Sorry Muggle</i></div>
+            <div class="head-small">(Order of Merlin, Zero Class, Chief Offender, Grand Fool of the Wizengamot)</div>
+          </header>
+
+          <!-- ========== EDIT THE LETTER HERE ========== -->
+          <div class="salute reveal">Dear Divakshi,</div>
+
+          <p class="p reveal">Unlike the letter you may have been hoping for, this one doesn&rsquo;t say you&rsquo;ve been accepted to Hogwarts. It says something far more important: <b>I am sorry.</b> Truly, deeply sorry.</p>
+
+          <p class="p reveal">For the past few days I haven&rsquo;t been there for you the way I should have been. I let meetings, work and my own busy head swallow the time that should have been ours &mdash; and you were left waiting, wondering, and feeling like you came last. You should never have felt that. Not even for a minute.</p>
+
+          <p class="p reveal">Let me say exactly what happened, because you deserve honesty and not excuses. The other day, after my meeting, I called you &mdash; and we got only five or ten minutes before I was gone again. When I finally called back, thirty minutes had passed. By then you were hurt and angry, and you didn&rsquo;t want to talk to me.</p>
+
+          <p class="p reveal">And you were right. If I had been in your place, I would have felt exactly the same. You weren&rsquo;t being dramatic or difficult &mdash; you were asking for the one thing I should have been giving you freely: my time and my attention.</p>
+
+          <p class="p reveal">I&rsquo;ve been treating time as if I owned a Time-Turner, as if I could always go back and make it up to you later. But I can&rsquo;t. It isn&rsquo;t that I don&rsquo;t have time for you &mdash; it&rsquo;s that I&rsquo;ve been spending it badly. And moments with you only come once.</p>
+
+          <p class="p reveal">So here is what I solemnly swear <span class="aside">(and this time, I am definitely not up to no good)</span>:</p>
+
+          <ul class="oath reveal">
+            <li>If I can&rsquo;t talk, I&rsquo;ll tell you exactly when I&rsquo;ll call back &mdash; and I&rsquo;ll call right on time.</li>
+            <li>No more rushed, half-present calls. When I&rsquo;m with you, I&rsquo;ll truly be with you.</li>
+            <li>Every single day, a little time that belongs only to us &mdash; phone away, mind here.</li>
+            <li>And when you&rsquo;re upset, I&rsquo;ll listen first, before I try to explain myself.</li>
+          </ul>
+
+          <p class="p reveal">You don&rsquo;t have to forgive me today. Take all the time you need. But whenever you&rsquo;re ready, I&rsquo;ll be right here &mdash; not after a meeting, not thirty minutes later, not &ldquo;in a bit.&rdquo; Just here.</p>
+
+          <p class="p reveal">You make even my most ordinary days feel a little bit magical, Divakshi, and I never want to be the reason that magic goes quiet.</p>
+
+          <div class="always reveal">
+            <div>&ldquo;After all this time?&rdquo;</div>
+            <div class="al2">&ldquo;Always.&rdquo;</div>
+          </div>
+
+          <div class="closing reveal">
+            <div class="yours">Yours, now and always,</div>
+            <div class="signature" id="signature">Your Muggle</div>
+          </div>
+
+          <p class="ps reveal"><b>P.S.</b> I promise I&rsquo;ll pick up when you call. And if you&rsquo;d rather reply by owl&hellip; I&rsquo;ll be waiting by the window. 🦉</p>
+          <!-- ========== END OF LETTER TEXT ========== -->
+
+          <div class="reparo reveal" id="reparoBlock">
+            <div class="rp-text">If you can find it in your heart to forgive me, whisper the spell &mdash; and let&rsquo;s mend things.</div>
+            <button class="btn rp-btn" id="reparoBtn" type="button">Reparo &#10022;</button>
+            <div class="rp-after" id="rpAfter">
+              <div class="rp-thanks">Thank you, Divakshi. 💛</div>
+              <div class="rp-sub">Whenever you&rsquo;re ready, I&rsquo;m right here &mdash; call, text, or send an owl. And this time, I&rsquo;ll pick up.</div>
+              <a class="btn rp-reply" id="replyBtn" href="#" target="_blank" rel="noopener">Send an owl back 🦉</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div id="scrollCue" aria-hidden="true">scroll &#8964;</div>
+  </div>
+
+  <!-- ======================= overlays ======================= -->
+  <canvas id="fx"></canvas>
+  <div id="flash"></div>
+  <div id="spell" aria-hidden="true"></div>
+  <div id="hint" role="status" aria-live="polite"></div>
+  <div id="cta"><button class="btn" id="ctaBtn" type="button"></button></div>
+  <button id="mute" type="button" aria-label="Toggle sound">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor" fill-opacity=".25"/>
+      <g id="muteWaves"><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/></g>
+      <path id="muteSlash" d="M15 9l6 6M21 9l-6 6" style="display:none"/>
+    </svg>
+  </button>
+  <div id="rotate"><div>🪄<br>Please hold your phone upright<br><small>The magic works best in portrait</small></div></div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
